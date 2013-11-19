@@ -7,4 +7,4 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_cookbook 'rsyslog'
+include_recipe 'rsyslog'
