@@ -76,16 +76,28 @@ Vagrant.configure("2") do |config|
       :rsyslog => {
         :server => "true",
         :log_dir => "/srv/logs",
+        :preserve_fqdn => "on",
+        :high_precision_timestamps => "on",
         :server_search => "role:rsyslog-server",
-        :"per_host_dir" => "%HOSTNAME%",
-        :logs_to_forward => "*"
+        :per_host_dir => "%HOSTNAME%",
+        :logs_to_forward => "*",
+        :papertrail_dest => "logs.papertrailapp.com:43039"
+      },
+      :rbenv => {
+        :global => '1.9.3-p327',
+        :rubies => ['1.9.3-p327'],
       }
     }
 
     chef.run_list = [
+        "recipe[ruby_build]",
+        "recipe[rbenv]",
+        "recipe[rbenv::system]",
+        "recipe[rbenv::vagrant]",
         "recipe[rsyslog-cookbook::default]",
         "recipe[rsyslog-cookbook::server]",
-        "recipe[rsyslog-cookbook::client]"
+        "recipe[rsyslog-cookbook::client]",
+        "recipe[rsyslog-cookbook::papertrail]"
     ]
   end
 end
