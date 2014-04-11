@@ -81,7 +81,7 @@ Vagrant.configure("2") do |config|
         :server_search => "role:rsyslog-server",
         :per_host_dir => "%HOSTNAME%",
         :logs_to_forward => "*",
-        :papertrail_dest => "logs.papertrailapp.com:43039"
+        :papertrail_dest => "logs.papertrailapp.com:11111"
       },
       :rbenv => {
         :global => '1.9.3-p327',
